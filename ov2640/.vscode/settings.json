@@ -1,0 +1,8 @@
+{
+    "idf.portWin": "COM1",
+    "files.associations": {
+        "sdkconfig.h": "c",
+        "img_converters.h": "c",
+        "ov2640_settings.h": "c"
+    }
+}
