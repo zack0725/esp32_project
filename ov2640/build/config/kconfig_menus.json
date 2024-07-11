@@ -26682,6 +26682,144 @@
                 "id": "component-config-wi-fi-provisioning-manager",
                 "title": "Wi-Fi Provisioning Manager",
                 "type": "menu"
+            },
+            {
+                "children": [
+                    {
+                        "children": [],
+                        "depends_on": null,
+                        "help": "Enable this option if you want to use the OV7670.\nDisable this option to safe memory.",
+                        "id": "OV7670_SUPPORT",
+                        "name": "OV7670_SUPPORT",
+                        "range": null,
+                        "title": "Support OV7670 VGA",
+                        "type": "bool"
+                    },
+                    {
+                        "children": [],
+                        "depends_on": null,
+                        "help": "Enable this option if you want to use the OV7725.\nDisable this option to save memory.",
+                        "id": "OV7725_SUPPORT",
+                        "name": "OV7725_SUPPORT",
+                        "range": null,
+                        "title": "Support OV7725 SVGA",
+                        "type": "bool"
+                    },
+                    {
+                        "children": [],
+                        "depends_on": null,
+                        "help": "Enable this option if you want to use the NT99141.\nDisable this option to save memory.",
+                        "id": "NT99141_SUPPORT",
+                        "name": "NT99141_SUPPORT",
+                        "range": null,
+                        "title": "Support NT99141 HD",
+                        "type": "bool"
+                    },
+                    {
+                        "children": [],
+                        "depends_on": null,
+                        "help": "Enable this option if you want to use the OV2640.\nDisable this option to save memory.",
+                        "id": "OV2640_SUPPORT",
+                        "name": "OV2640_SUPPORT",
+                        "range": null,
+                        "title": "Support OV2640 2MP",
+                        "type": "bool"
+                    },
+                    {
+                        "children": [],
+                        "depends_on": null,
+                        "help": "Enable this option if you want to use the OV3360.\nDisable this option to save memory.",
+                        "id": "OV3660_SUPPORT",
+                        "name": "OV3660_SUPPORT",
+                        "range": null,
+                        "title": "Support OV3660 3MP",
+                        "type": "bool"
+                    },
+                    {
+                        "children": [],
+                        "depends_on": null,
+                        "help": "Enable this option if you want to use the OV5640.\nDisable this option to save memory.",
+                        "id": "OV5640_SUPPORT",
+                        "name": "OV5640_SUPPORT",
+                        "range": null,
+                        "title": "Support OV5640 5MP",
+                        "type": "bool"
+                    },
+                    {
+                        "children": [
+                            {
+                                "children": [],
+                                "depends_on": "<choice SCCB_HARDWARE_I2C_PORT>",
+                                "help": null,
+                                "id": "SCCB_HARDWARE_I2C_PORT0",
+                                "name": "SCCB_HARDWARE_I2C_PORT0",
+                                "range": null,
+                                "title": "I2C0",
+                                "type": "bool"
+                            },
+                            {
+                                "children": [],
+                                "depends_on": "<choice SCCB_HARDWARE_I2C_PORT>",
+                                "help": null,
+                                "id": "SCCB_HARDWARE_I2C_PORT1",
+                                "name": "SCCB_HARDWARE_I2C_PORT1",
+                                "range": null,
+                                "title": "I2C1",
+                                "type": "bool"
+                            }
+                        ],
+                        "depends_on": null,
+                        "help": null,
+                        "id": "component-config-camera-configuration-i2c-peripheral-to-use-for-sccb",
+                        "name": "SCCB_HARDWARE_I2C_PORT",
+                        "title": "I2C peripheral to use for SCCB",
+                        "type": "choice"
+                    },
+                    {
+                        "children": [
+                            {
+                                "children": [],
+                                "depends_on": "<choice CAMERA_TASK_PINNED_TO_CORE>",
+                                "help": null,
+                                "id": "CAMERA_CORE0",
+                                "name": "CAMERA_CORE0",
+                                "range": null,
+                                "title": "CORE0",
+                                "type": "bool"
+                            },
+                            {
+                                "children": [],
+                                "depends_on": "<choice CAMERA_TASK_PINNED_TO_CORE>",
+                                "help": null,
+                                "id": "CAMERA_CORE1",
+                                "name": "CAMERA_CORE1",
+                                "range": null,
+                                "title": "CORE1",
+                                "type": "bool"
+                            },
+                            {
+                                "children": [],
+                                "depends_on": "<choice CAMERA_TASK_PINNED_TO_CORE>",
+                                "help": null,
+                                "id": "CAMERA_NO_AFFINITY",
+                                "name": "CAMERA_NO_AFFINITY",
+                                "range": null,
+                                "title": "NO_AFFINITY",
+                                "type": "bool"
+                            }
+                        ],
+                        "depends_on": null,
+                        "help": "Pin the camera handle task to a certain core(0/1). It can also be done automatically choosing NO_AFFINITY.",
+                        "id": "component-config-camera-configuration-camera-task-pinned-to-core",
+                        "name": "CAMERA_TASK_PINNED_TO_CORE",
+                        "title": "Camera task pinned to core",
+                        "type": "choice"
+                    }
+                ],
+                "depends_on": null,
+                "id": "component-config-camera-configuration",
+                "title": "Camera configuration",
+                "type": "menu"
             }
         ],
         "depends_on": null,

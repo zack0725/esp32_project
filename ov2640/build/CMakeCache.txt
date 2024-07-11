@@ -14,6 +14,12 @@
 # EXTERNAL cache entries
 ########################
 
+//No help, variable specified on the command line.
+CCACHE_ENABLE:UNINITIALIZED=1
+
+//Path to a program.
+CCACHE_FOUND:FILEPATH=D:/Programs/esp/.espressif/tools/ccache/4.8/ccache-4.8-windows-x86_64/ccache.exe
+
 //Path to a program.
 CMAKE_ADDR2LINE:FILEPATH=D:/Programs/esp/.espressif/tools/xtensa-esp-elf/esp-13.2.0_20230928/xtensa-esp-elf/bin/xtensa-esp32-elf-addr2line.exe
 
@@ -154,7 +160,7 @@ CMAKE_INSTALL_MANDIR:PATH=
 CMAKE_INSTALL_OLDINCLUDEDIR:PATH=/usr/include
 
 //Install path prefix, prepended onto install directories.
-CMAKE_INSTALL_PREFIX:PATH=C:/Program Files (x86)/hello_world
+CMAKE_INSTALL_PREFIX:PATH=C:/Program Files (x86)/ov2640
 
 //Run-time variable data (LOCALSTATEDIR/run)
 CMAKE_INSTALL_RUNSTATEDIR:PATH=
@@ -344,6 +350,9 @@ Mbed TLS_IS_TOP_LEVEL:STATIC=OFF
 Mbed TLS_SOURCE_DIR:STATIC=D:/Programs/esp/Espressif/frameworks/esp-idf-v5.2.2/components/mbedtls/mbedtls
 
 //No help, variable specified on the command line.
+PYTHON:UNINITIALIZED=d:\Programs\esp\.espressif\python_env\idf5.2_py3.11_env\Scripts\python.exe
+
+//No help, variable specified on the command line.
 PYTHON_DEPS_CHECKED:UNINITIALIZED=1
 
 //Allow unsafe builds. These builds ARE NOT SECURE.
@@ -366,15 +375,6 @@ esp-idf_SOURCE_DIR:STATIC=D:/Programs/esp/Espressif/frameworks/esp-idf-v5.2.2
 
 //Dependencies for the target
 everest_LIB_DEPENDS:STATIC=general;__idf_cxx;general;__idf_newlib;general;__idf_freertos;general;__idf_esp_hw_support;general;__idf_heap;general;__idf_log;general;__idf_soc;general;__idf_hal;general;__idf_esp_rom;general;__idf_esp_common;general;__idf_esp_system;general;__idf_xtensa;
-
-//Value Computed by CMake
-hello_world_BINARY_DIR:STATIC=F:/project/esp32_project/ov2640/build
-
-//Value Computed by CMake
-hello_world_IS_TOP_LEVEL:STATIC=ON
-
-//Value Computed by CMake
-hello_world_SOURCE_DIR:STATIC=F:/project/esp32_project/ov2640
 
 //Dependencies for the target
 mbedcrypto_LIB_DEPENDS:STATIC=general;__idf_cxx;general;__idf_newlib;general;__idf_freertos;general;__idf_esp_hw_support;general;__idf_heap;general;__idf_log;general;__idf_soc;general;__idf_hal;general;__idf_esp_rom;general;__idf_esp_common;general;__idf_esp_system;general;__idf_xtensa;general;everest;general;p256m;
@@ -545,7 +545,7 @@ CMAKE_MODULE_LINKER_FLAGS_RELWITHDEBINFO-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_NM
 CMAKE_NM-ADVANCED:INTERNAL=1
 //number of local generators
-CMAKE_NUMBER_OF_MAKEFILES:INTERNAL=89
+CMAKE_NUMBER_OF_MAKEFILES:INTERNAL=90
 //ADVANCED property for variable: CMAKE_OBJCOPY
 CMAKE_OBJCOPY-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_OBJDUMP
@@ -607,7 +607,7 @@ HAVE_TIME_T_SIZE:INTERNAL=TRUE
 //CHECK_TYPE_SIZE: sizeof(time_t)
 TIME_T_SIZE:INTERNAL=8
 //CMAKE_INSTALL_PREFIX during last run
-_GNUInstallDirs_LAST_CMAKE_INSTALL_PREFIX:INTERNAL=C:/Program Files (x86)/hello_world
+_GNUInstallDirs_LAST_CMAKE_INSTALL_PREFIX:INTERNAL=C:/Program Files (x86)/ov2640
 _Python3_EXECUTABLE:INTERNAL=d:/Programs/esp/.espressif/python_env/idf5.2_py3.11_env/Scripts/python.exe
 //Python3 Properties
 _Python3_INTERPRETER_PROPERTIES:INTERNAL=Python;3;11;2;32;;;d:\Programs\esp\.espressif\tools\idf-python\3.11.2\Lib;d:\Programs\esp\.espressif\tools\idf-python\3.11.2\Lib;d:\Programs\esp\.espressif\python_env\idf5.2_py3.11_env\Lib\site-packages;d:\Programs\esp\.espressif\python_env\idf5.2_py3.11_env\Lib\site-packages

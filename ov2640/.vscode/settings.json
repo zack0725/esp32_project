@@ -1,8 +1,15 @@
 {
-    "idf.portWin": "COM1",
     "files.associations": {
-        "sdkconfig.h": "c",
-        "img_converters.h": "c",
-        "ov2640_settings.h": "c"
-    }
+        "esp_camera.h": "c",
+        "freertos.h": "c",
+        "stdbool.h": "c",
+        "io_mux_reg.h": "c",
+        "esp_rom_lldesc.h": "c",
+        "gpio_struct.h": "c",
+        "esp_log.h": "c",
+        "esp_intr_alloc.h": "c",
+        "gpio_sig_map.h": "c",
+        "periph_ctrl.h": "c"
+    },
+    "idf.adapterTargetName": "esp32"
 }

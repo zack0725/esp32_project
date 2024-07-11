@@ -2,17 +2,30 @@
     "configurations": [
         {
             "name": "Win32",
+            "cStandard": "c17",
+            "cppStandard": "gnu++17",
+            "intelliSenseMode": "windows-gcc-x64",
+            "compileCommands": "${workspaceFolder}/build/compile_commands.json",
             "includePath": [
-                "${workspaceFolder}/**"
+                "${config:idf.espIdfPathWin}/components/**",
+                "${workspaceFolder}/**",
+                "${workspaceFolder}/components/driver/private_include",
+                "${workspaceFolder}/components/driver/include",
+                "D:/Programs/esp/Espressif/frameworks/esp-idf-v5.2.2/components/driver/ledc/include",
+                "${workspaceFolder}/components/conversions/include"
             ],
+            "browse": {
+                "path": [
+                    "${config:idf.espIdfPathWin}/components",
+                    "${workspaceFolder}"
+                ],
+                "limitSymbolsToIncludedHeaders": false
+            },
             "defines": [
                 "_DEBUG",
                 "UNICODE",
                 "_UNICODE"
-            ],
-            "cStandard": "c17",
-            "cppStandard": "gnu++14",
-            "intelliSenseMode": "windows-gcc-x64"
+            ]
         }
     ],
     "version": 4

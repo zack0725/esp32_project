@@ -50,3 +50,4 @@ source "D:/Programs/esp/Espressif/frameworks/esp-idf-v5.2.2/components/usb/Kconf
 source "D:/Programs/esp/Espressif/frameworks/esp-idf-v5.2.2/components/vfs/Kconfig"
 source "D:/Programs/esp/Espressif/frameworks/esp-idf-v5.2.2/components/wear_levelling/Kconfig"
 source "D:/Programs/esp/Espressif/frameworks/esp-idf-v5.2.2/components/wifi_provisioning/Kconfig"
+source "F:/project/esp32_project/ov2640/components/kconfig"

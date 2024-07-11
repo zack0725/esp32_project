@@ -62,7 +62,6 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
-
 /**
  * @brief Configuration structure for camera initialization
  */

@@ -1,15 +1,4 @@
-// jpge.cpp - C++ class for JPEG compression.
-// Public domain, Rich Geldreich <richgel99@gmail.com>
-// v1.01, Dec. 18, 2010 - Initial release
-// v1.02, Apr. 6, 2011 - Removed 2x2 ordered dither in H2V1 chroma subsampling method load_block_16_8_8(). (The rounding factor was 2, when it should have been 1. Either way, it wasn't helping.)
-// v1.03, Apr. 16, 2011 - Added support for optimized Huffman code tables, optimized dynamic memory allocation down to only 1 alloc.
-//                        Also from Alex Evans: Added RGBA support, linear memory allocator (no longer needed in v1.03).
-// v1.04, May. 19, 2012: Forgot to set m_pFile ptr to NULL in cfile_stream::close(). Thanks to Owen Kaluza for reporting this bug.
-//                       Code tweaks to fix VS2008 static code analysis warnings (all looked harmless).
-//                       Code review revealed method load_block_16_8_8() (used for the non-default H2V1 sampling mode to downsample chroma) somehow didn't get the rounding factor fix from v1.02.
-
 #include "jpge.h"
-
 #include <stdint.h>
 #include <stdarg.h>
 #include <stddef.h>
