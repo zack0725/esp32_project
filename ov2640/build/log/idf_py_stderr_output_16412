@@ -1,9 +1,0 @@
-CMake Error at D:/Programs/esp/Espressif/frameworks/esp-idf-v5.2.2/tools/cmake/component.cmake:313 (message):
-  Include directory
-  'F:/project/esp32_project/ov2640/components/conversion/include' is not a
-  directory.
-Call Stack (most recent call first):
-  D:/Programs/esp/Espressif/frameworks/esp-idf-v5.2.2/tools/cmake/component.cmake:481 (__component_add_include_dirs)
-  components/CMakeLists.txt:1 (idf_component_register)
-
-
