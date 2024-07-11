@@ -12,7 +12,6 @@
 #include "esp_log.h"
 static const char* TAG = "sccb";
 #endif
-#include <FreeRTOS.h>
 
 #define LITTLETOBIG(x)          ((x<<8)|(x>>8))
 
