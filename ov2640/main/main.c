@@ -22,6 +22,7 @@
 #include "lwip/dns.h"
 #include "mqtt_client.h"
 #include <esp_mac.h>
+#include "wifi.h"
 
 #define PWDN_GPIO_NUM 43
 #define RESET_GPIO_NUM 44
@@ -87,7 +88,7 @@ static camera_config_t camera_config = {
     .fb_count = 1       //if more than one, i2s runs in continuous mode. Use only with JPEG
 
 };
-
+#if 1
 esp_err_t _http_event_handler(esp_http_client_event_t *evt)
 {
     switch (evt->event_id)
@@ -174,9 +175,23 @@ static void Task_upload_pic(void *pvParameters)
             ESP_LOGI(TAG, "Camera capture OK , Its width was: %d", pic->width);
             ESP_LOGI(TAG, "Camera capture OK , Its height was: %d ", pic->height);
 
+            //save pic
+            FILE *file;
+            file = fopen("captured_image.jpg", "wb");
+            if (file == NULL) {
+                printf("Error opening file!\n");
+                return;
+            }
+
+            // 写入JPEG图像数据
+            fwrite(pic->buf, pic->len, 1, file);
+
+            // 关闭文件
+            fclose(file);
+
             esp_http_client_handle_t esp_client = esp_http_client_init(&config);
 
-            //设置HTTP请求头为image/jpg表示图片类型
+            // 设置HTTP请求头为image/jpg表示图片类型
             esp_http_client_set_header(esp_client, "Content-Type", "image/jpg");
 
             //设置图片名字
@@ -188,7 +203,7 @@ static void Task_upload_pic(void *pvParameters)
             //开始执行请求服务器
             res = esp_http_client_perform(esp_client);
 
-            //判断是否请求成功
+            // 判断是否请求成功
             if (res == ESP_OK)
             {
                 ESP_LOGI(TAG, "HTTPS Status = %d", esp_http_client_get_status_code(esp_client));
@@ -211,26 +226,22 @@ end:
     ESP_LOGI(TAG, "Http End");
     vTaskDelete(NULL);
 }
+#endif
 
 static esp_err_t mqtt_event_handler(esp_mqtt_event_handle_t event)
 {
     esp_mqtt_client_handle_t client = event->client;
-
     switch (event->event_id)
     {
     case MQTT_EVENT_CONNECTED:
-
-        esp_mqtt_client_subscribe(client, "/light/deviceIn", 1);
-        ESP_LOGI(TAG, "sent subscribe successful, topic: /light/deviceIn");
-
+        esp_mqtt_client_subscribe(client, "/thing/event/property/post_reply", 1);
+        ESP_LOGI(TAG, "sent subscribe successful, topic:/thing/event/property/post_reply");
         break;
     case MQTT_EVENT_DISCONNECTED:
         ESP_LOGI(TAG, "MQTT_EVENT_DISCONNECTED");
         break;
-
     case MQTT_EVENT_SUBSCRIBED:
         ESP_LOGI(TAG, "MQTT_EVENT_SUBSCRIBED, msg_id=%d", event->msg_id);
-
         break;
     case MQTT_EVENT_UNSUBSCRIBED:
         ESP_LOGI(TAG, "MQTT_EVENT_UNSUBSCRIBED, msg_id=%d", event->msg_id);
@@ -240,7 +251,6 @@ static esp_err_t mqtt_event_handler(esp_mqtt_event_handle_t event)
         break;
     case MQTT_EVENT_DATA:
         ESP_LOGI(TAG, "MQTT_EVENT_DATA");
-
         printf("TOPIC=%.*s\r\n", event->topic_len, event->topic);
         printf("DATA=%.*s\r\n", event->data_len, event->data);
 
@@ -258,12 +268,10 @@ static esp_err_t mqtt_event_handler(esp_mqtt_event_handle_t event)
             if (action_json->type == cJSON_Number)
             {
                 printf("action:%d\r\n", action_json->valueint);
-
                 switch (action_json->valueint)
                 {
                 case 0:
                     name_json = cJSON_GetObjectItem(root_json, "name"); //获取name键对应的值的信息
-
                     if (name_json->type == cJSON_String)
                     {
 
@@ -273,13 +281,12 @@ static esp_err_t mqtt_event_handler(esp_mqtt_event_handle_t event)
                         xTaskCreate(Task_upload_pic, "Task_upload_pic", 8192, test_task_param, 6, NULL);
                     }
                     break;
-
                 default:
                     break;
                 }
             }
         }
-        cJSON_Delete(root_json); //释放内存
+    cJSON_Delete(root_json); //释放内存
         break;
     case MQTT_EVENT_ERROR:
         ESP_LOGI(TAG, "MQTT_EVENT_ERROR");
@@ -296,25 +303,26 @@ static esp_err_t mqtt_event_handler(esp_mqtt_event_handle_t event)
  * @param: 
  * @return: 
 */
+#define   Aliyun_hostname   "iot-06z00a1smtn0iho.mqtt.iothub.aliyuncs.com" //或称mqttHostUrl、Broker Address
+#define   Aliyun_port       1883
+#define   Aliyun_client_id  "i6nxMWm4zIX.esp32|securemode=2,signmethod=hmacsha256,timestamp=1720687031863|"
+#define   Aliyun_username   "esp32&i6nxMWm4zIX"
+#define   Aliyun_password   "680eba83ed7efc800b72b68fba750d208271ac1ba547c264dd8d270df96436d6"
 void TaskXMqttRecieve(void *p)
 {
 
     //连接的配置参数
     esp_mqtt_client_config_t mqtt_cfg = {
-        .broker.address.uri = "a0je61a.mqtt.iot.gz.baidubce.com",
-        
-        // .host = "a0je61a.mqtt.iot.gz.baidubce.com", //连接的域名 ，请务必修改为您的
-        // .port = 1883,                               //端口，请务必修改为您的
-        // .username = "a0je61a/esp8266",              //用户名，请务必修改为您的
-        // .password = "sMhrD6kcRFlmIgRF",             //密码，请务必修改为您的
-        // .client_id = deviceUUID,
-        // .event_handle = mqtt_event_handler, //设置回调函数
-        // .keepalive = 120,                   //心跳
-        // .disable_auto_reconnect = false,    //开启自动重连
-        // .disable_clean_session = false,     //开启 清除会话
+         // idf 新版本(esp-idf-V5.2.1)参数配置如下
+        .broker.address.transport = MQTT_TRANSPORT_OVER_TCP,
+        .broker.address.hostname = Aliyun_hostname,
+        .broker.address.port = Aliyun_port,
+        .credentials.client_id = Aliyun_client_id,
+        .credentials.username = Aliyun_username,
+        .credentials.authentication.password = Aliyun_password,
     };
     esp_mqtt_client_handle_t  client = esp_mqtt_client_init(&mqtt_cfg);
-    //esp_mqtt_client_register_event(client, ESP_EVENT_ANY_ID, mqtt_event_handler, client);
+    esp_mqtt_client_register_event(client, ESP_EVENT_ANY_ID, mqtt_event_handler, client);
     esp_mqtt_client_start(client);
 
     vTaskDelete(NULL);
@@ -338,6 +346,7 @@ void app_main()
     esp_read_mac(mac, ESP_MAC_WIFI_STA);
     sprintf(deviceUUID, "%02x%02x%02x%02x%02x%02x", mac[0], mac[1], mac[2], mac[3], mac[4], mac[5]);
 
+    connect_wifi();
     /* This helper function configures Wi-Fi or Ethernet, as selected in menuconfig.
      * Read "Establishing Wi-Fi or Ethernet Connection" section in
      * examples/protocols/README.md for more information about this function.
@@ -352,4 +361,5 @@ void app_main()
     }
     ESP_LOGE(TAG, "camera_config.fb_count = %d", camera_config.fb_count);
 
+    xTaskCreate(&TaskXMqttRecieve, "TaskXMqttRecieve", 1024 * 4, NULL, 5, NULL);
 }

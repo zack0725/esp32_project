@@ -1,7 +1,7 @@
 {
     "version":            "1.1",
     "project_name":       "ov2640",
-    "project_version":    "18cd23a-dirty",
+    "project_version":    "cf9dbbe-dirty",
     "project_path":       "F:/project/esp32_project/ov2640",
     "idf_path":           "D:/Programs/esp/Espressif/frameworks/esp-idf-v5.2.2",
     "build_dir":          "F:/project/esp32_project/ov2640/build",
@@ -126,11 +126,11 @@
             "type": "LIBRARY",
             "lib": "__idf_components",
             "reqs": [ "driver", "esp_timer" ],
-            "priv_reqs": [ "freertos", "nvs_flash" ],
+            "priv_reqs": [ "freertos", "nvs_flash", "esp_wifi" ],
             "managed_reqs": [],
             "managed_priv_reqs": [],
             "file": "F:/project/esp32_project/ov2640/build/esp-idf/components/libcomponents.a",
-            "sources": [ "F:/project/esp32_project/ov2640/components/driver/camera.c", "F:/project/esp32_project/ov2640/components/driver/sccb.c", "F:/project/esp32_project/ov2640/components/driver/sensor.c", "F:/project/esp32_project/ov2640/components/driver/xclk.c", "F:/project/esp32_project/ov2640/components/sensors/ov2640.c", "F:/project/esp32_project/ov2640/components/conversions/yuv.c", "F:/project/esp32_project/ov2640/components/conversions/to_jpg.cpp", "F:/project/esp32_project/ov2640/components/conversions/to_bmp.c", "F:/project/esp32_project/ov2640/components/conversions/jpge.cpp", "F:/project/esp32_project/ov2640/components/conversions/esp_jpg_decode.c" ],
+            "sources": [ "F:/project/esp32_project/ov2640/components/driver/camera.c", "F:/project/esp32_project/ov2640/components/driver/sccb.c", "F:/project/esp32_project/ov2640/components/driver/sensor.c", "F:/project/esp32_project/ov2640/components/driver/xclk.c", "F:/project/esp32_project/ov2640/components/driver/wifi.c", "F:/project/esp32_project/ov2640/components/sensors/ov2640.c", "F:/project/esp32_project/ov2640/components/conversions/yuv.c", "F:/project/esp32_project/ov2640/components/conversions/to_jpg.cpp", "F:/project/esp32_project/ov2640/components/conversions/to_bmp.c", "F:/project/esp32_project/ov2640/components/conversions/jpge.cpp", "F:/project/esp32_project/ov2640/components/conversions/esp_jpg_decode.c" ],
             "include_dirs": [ "driver/include", "conversions/include" ]
         },
         "console": {
@@ -2140,7 +2140,7 @@
             "dir": "F:/project/esp32_project/ov2640/components",
             "lib": "__idf_components",
             "reqs": [ "driver", "esp_timer" ],
-            "priv_reqs": [ "freertos", "nvs_flash" ],
+            "priv_reqs": [ "freertos", "nvs_flash", "esp_wifi" ],
             "managed_reqs": [],
             "managed_priv_reqs": [],
             "include_dirs": [ "driver/include", "conversions/include" ]

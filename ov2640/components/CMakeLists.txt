@@ -4,6 +4,7 @@ if(IDF_TARGET STREQUAL "esp32")
     driver/sccb.c
     driver/sensor.c
     driver/xclk.c
+    driver/wifi.c
     sensors/ov2640.c
     conversions/yuv.c
     conversions/to_jpg.cpp
@@ -26,7 +27,7 @@ if(IDF_TARGET STREQUAL "esp32")
   set(COMPONENT_REQUIRES 
     driver 
     esp_timer)
-  set(COMPONENT_PRIV_REQUIRES freertos nvs_flash)
+  set(COMPONENT_PRIV_REQUIRES freertos nvs_flash esp_wifi)
 
   register_component()
 endif()
