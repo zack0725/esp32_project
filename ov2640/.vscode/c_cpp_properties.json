@@ -12,7 +12,8 @@
                 "${workspaceFolder}/components/driver/private_include",
                 "${workspaceFolder}/components/driver/include",
                 "D:/Programs/esp/Espressif/frameworks/esp-idf-v5.2.2/components/driver/ledc/include",
-                "${workspaceFolder}/components/conversions/include"
+                "${workspaceFolder}/components/conversions/include",
+                "D:/Programs/esp/Espressif/frameworks/esp-idf-v5.2.2/components/freertos/FreeRTOS-Kernel-SMP/portable/linux/include/freertos"
             ],
             "browse": {
                 "path": [
@@ -25,7 +26,8 @@
                 "_DEBUG",
                 "UNICODE",
                 "_UNICODE"
-            ]
+            ],
+            "compilerPath": "${config:idf.toolsPathWin}\\tools\\xtensa-esp-elf\\esp-13.2.0_20230928\\xtensa-esp-elf\\bin\\xtensa-esp32-elf-gcc.exe"
         }
     ],
     "version": 4

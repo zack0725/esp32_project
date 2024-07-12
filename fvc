@@ -1,0 +1,23 @@
+[33mcommit 596b93ad1136a9a6db54747d81c223eeb1abc95b[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m)[m
+Author: hxd2 <2998854252@qq.com>
+Date:   Thu Jul 11 11:31:25 2024 +0800
+
+    v1.0
+
+[33mcommit 2c23e949a1e4ee570312b1f5df03d9c6cc61911c[m[33m ([m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Author: hxd2 <2998854252@qq.com>
+Date:   Wed Jul 10 17:30:12 2024 +0800
+
+    test
+
+[33mcommit ea580b749fd6b2e09294ea3601c24add3431c973[m
+Author: hxd <2998854252@qq.com>
+Date:   Wed Jun 12 21:11:58 2024 +0800
+
+    make main.c file
+
+[33mcommit 8bd9eae7b19613acd2693282eaae136ecf7d05da[m[33m ([m[1;31morigin/develop[m[33m)[m
+Author: zack0725 <64057855+zack0725@users.noreply.github.com>
+Date:   Tue Jun 11 18:53:42 2024 +0800
+
+    Initial commit
