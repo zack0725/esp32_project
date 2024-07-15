@@ -1,0 +1,13 @@
+# Target labels
+ bootloader
+# Source files and their labels
+F:/project/esp32_project/esp32-cam/build/CMakeFiles/bootloader
+F:/project/esp32_project/esp32-cam/build/CMakeFiles/bootloader.rule
+F:/project/esp32_project/esp32-cam/build/CMakeFiles/bootloader-complete.rule
+F:/project/esp32_project/esp32-cam/build/bootloader-prefix/src/bootloader-stamp/bootloader-build.rule
+F:/project/esp32_project/esp32-cam/build/bootloader-prefix/src/bootloader-stamp/bootloader-configure.rule
+F:/project/esp32_project/esp32-cam/build/bootloader-prefix/src/bootloader-stamp/bootloader-download.rule
+F:/project/esp32_project/esp32-cam/build/bootloader-prefix/src/bootloader-stamp/bootloader-install.rule
+F:/project/esp32_project/esp32-cam/build/bootloader-prefix/src/bootloader-stamp/bootloader-mkdir.rule
+F:/project/esp32_project/esp32-cam/build/bootloader-prefix/src/bootloader-stamp/bootloader-patch.rule
+F:/project/esp32_project/esp32-cam/build/bootloader-prefix/src/bootloader-stamp/bootloader-update.rule

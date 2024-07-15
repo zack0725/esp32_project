@@ -1,0 +1,33 @@
+dependencies:
+  esp-face:
+    component_hash: null
+    source:
+      path: F:\project\esp32_project\esp32-cam\components\esp-face
+      type: local
+    version: '*'
+  esp-sr:
+    component_hash: null
+    source:
+      path: F:\project\esp32_project\esp32-cam\components\esp-sr
+      type: local
+    version: '*'
+  espressif/esp32-camera:
+    component_hash: null
+    source:
+      path: F:\project\esp32_project\esp32-cam\components\esp32-camera
+      type: local
+    version: '*'
+  fb_gfx:
+    component_hash: null
+    source:
+      path: F:\project\esp32_project\esp32-cam\components\fb_gfx
+      type: local
+    version: '*'
+  idf:
+    component_hash: null
+    source:
+      type: idf
+    version: 5.2.2
+manifest_hash: 23e3f10535fee8fae9c4189384fa158eb7b399b2c540e9b14ddc5f2bca761a32
+target: esp32
+version: 1.0.0
