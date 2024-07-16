@@ -61,6 +61,7 @@ F:/project/esp32_project/esp32-cam/build/esp-idf/nvs_sec_provider/libnvs_sec_pro
 F:/project/esp32_project/esp32-cam/build/esp-idf/perfmon/libperfmon.a
 F:/project/esp32_project/esp32-cam/build/esp-idf/spiffs/libspiffs.a
 F:/project/esp32_project/esp32-cam/build/esp-idf/wifi_provisioning/libwifi_provisioning.a
+F:/project/esp32_project/esp32-cam/build/esp-idf/espressif__mdns/libespressif__mdns.a
 F:/project/esp32_project/esp32-cam/build/esp-idf/esp-face/libesp-face.a
 F:/project/esp32_project/esp32-cam/build/esp-idf/esp-sr/libesp-sr.a
 F:/project/esp32_project/esp32-cam/build/esp-idf/esp32-camera/libesp32-camera.a

@@ -25,7 +25,7 @@
 #include "freertos/event_groups.h"
 #include "esp_system.h"
 #include "esp_wifi.h"
-#include "esp_event_loop.h"
+#include "esp_event.h"
 #include "esp_log.h"
 #include "nvs_flash.h"
 #include "sdkconfig.h"
@@ -97,14 +97,14 @@ void wifi_init_softap()
         int a, b, c, d;
         //读取格式化的字符串中的数据
         sscanf(EXAMPLE_IP_ADDR, "%d.%d.%d.%d", &a, &b, &c, &d);
-        tcpip_adapter_ip_info_t ip_info;
+        esp_netif_ip_info_t ip_info;
         //设置由4个字节部分指定的IP地址
         IP4_ADDR(&ip_info.ip, a, b, c, d);
         IP4_ADDR(&ip_info.gw, a, b, c, d);
         IP4_ADDR(&ip_info.netmask, 255, 255, 255, 0);
-        ESP_ERROR_CHECK(tcpip_adapter_dhcps_stop(WIFI_IF_AP));
-        ESP_ERROR_CHECK(tcpip_adapter_set_ip_info(WIFI_IF_AP, &ip_info));
-        ESP_ERROR_CHECK(tcpip_adapter_dhcps_start(WIFI_IF_AP));
+        ESP_ERROR_CHECK(esp_netif_dhcps_stop(WIFI_IF_AP));
+        ESP_ERROR_CHECK(esp_netif_set_ip_info(WIFI_IF_AP, &ip_info));
+        ESP_ERROR_CHECK(esp_netif_dhcps_start(WIFI_IF_AP));
     }
     wifi_config_t wifi_config;
     //初始化内存的“万能函数”，通常为新申请的内存进行初始化工作。

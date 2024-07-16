@@ -414,6 +414,11 @@ endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for the subdirectory.
+  include("F:/project/esp32_project/esp32-cam/build/esp-idf/espressif__mdns/cmake_install.cmake")
+endif()
+
+if(NOT CMAKE_INSTALL_LOCAL_ONLY)
+  # Include the install script for the subdirectory.
   include("F:/project/esp32_project/esp32-cam/build/esp-idf/esp-face/cmake_install.cmake")
 endif()
 

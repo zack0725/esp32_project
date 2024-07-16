@@ -13,5 +13,22 @@
     ],
     "idf.portWin": "COM1",
     "idf.pythonBinPathWin": "d:\\Programs\\esp\\.espressif\\python_env\\idf5.2_py3.11_env\\Scripts\\python.exe",
-    "idf.toolsPathWin": "d:\\Programs\\esp\\.espressif"
+    "idf.toolsPathWin": "d:\\Programs\\esp\\.espressif",
+    "files.associations": {
+        "esp_camera.h": "c",
+        "esp_log.h": "c",
+        "ledc.h": "c",
+        "app_camera.h": "c",
+        "esp_intr_alloc.h": "c",
+        "sdkconfig.h": "c",
+        "inttypes.h": "c",
+        "esp_event_loop.h": "c",
+        "ov5640.h": "c",
+        "esp_wifi.h": "c",
+        "esp_event.h": "c",
+        "nvs_flash.h": "c",
+        "esp_netif.h": "c",
+        "esp_system.h": "c",
+        "esp_mac.h": "c"
+    }
 }

@@ -635,6 +635,13 @@ F:/project/esp32_project/esp32-cam/build/esp-idf/wifi_provisioning/CMakeFiles/li
 F:/project/esp32_project/esp32-cam/build/esp-idf/wifi_provisioning/CMakeFiles/install.dir
 F:/project/esp32_project/esp32-cam/build/esp-idf/wifi_provisioning/CMakeFiles/install/local.dir
 F:/project/esp32_project/esp32-cam/build/esp-idf/wifi_provisioning/CMakeFiles/install/strip.dir
+F:/project/esp32_project/esp32-cam/build/esp-idf/espressif__mdns/CMakeFiles/__idf_espressif__mdns.dir
+F:/project/esp32_project/esp32-cam/build/esp-idf/espressif__mdns/CMakeFiles/edit_cache.dir
+F:/project/esp32_project/esp32-cam/build/esp-idf/espressif__mdns/CMakeFiles/rebuild_cache.dir
+F:/project/esp32_project/esp32-cam/build/esp-idf/espressif__mdns/CMakeFiles/list_install_components.dir
+F:/project/esp32_project/esp32-cam/build/esp-idf/espressif__mdns/CMakeFiles/install.dir
+F:/project/esp32_project/esp32-cam/build/esp-idf/espressif__mdns/CMakeFiles/install/local.dir
+F:/project/esp32_project/esp32-cam/build/esp-idf/espressif__mdns/CMakeFiles/install/strip.dir
 F:/project/esp32_project/esp32-cam/build/esp-idf/esp-face/CMakeFiles/__idf_esp-face.dir
 F:/project/esp32_project/esp32-cam/build/esp-idf/esp-face/CMakeFiles/edit_cache.dir
 F:/project/esp32_project/esp32-cam/build/esp-idf/esp-face/CMakeFiles/rebuild_cache.dir

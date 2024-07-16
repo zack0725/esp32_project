@@ -52,3 +52,4 @@ source "D:/Programs/esp/Espressif/frameworks/esp-idf-v5.2.2/components/wear_leve
 source "D:/Programs/esp/Espressif/frameworks/esp-idf-v5.2.2/components/wifi_provisioning/Kconfig"
 source "F:/project/esp32_project/esp32-cam/components/esp-face/Kconfig"
 source "F:/project/esp32_project/esp32-cam/components/esp32-camera/Kconfig"
+source "F:/project/esp32_project/esp32-cam/managed_components/espressif__mdns/Kconfig"

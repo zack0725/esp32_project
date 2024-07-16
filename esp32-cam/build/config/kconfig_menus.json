@@ -4724,6 +4724,470 @@
                 "children": [
                     {
                         "children": [],
+                        "depends_on": null,
+                        "help": "Hostname that the camera will advertise over mDNS.",
+                        "id": "ESP_HOST_NAME",
+                        "name": "ESP_HOST_NAME",
+                        "range": null,
+                        "title": "Camera Host Name",
+                        "type": "string"
+                    },
+                    {
+                        "children": [],
+                        "depends_on": null,
+                        "help": "WiFi SSID (network name) to connect to or empty for Off.",
+                        "id": "ESP_WIFI_SSID",
+                        "name": "ESP_WIFI_SSID",
+                        "range": null,
+                        "title": "WiFi STA SSID",
+                        "type": "string"
+                    },
+                    {
+                        "children": [],
+                        "depends_on": null,
+                        "help": "WiFi Password if WEP/WPA/WPA2 or empty if Open.",
+                        "id": "ESP_WIFI_PASSWORD",
+                        "name": "ESP_WIFI_PASSWORD",
+                        "range": null,
+                        "title": "WiFi STA Password",
+                        "type": "string"
+                    },
+                    {
+                        "children": [],
+                        "depends_on": null,
+                        "help": "AP SSID (network name) to create or empty for Off.",
+                        "id": "ESP_WIFI_AP_SSID",
+                        "name": "ESP_WIFI_AP_SSID",
+                        "range": null,
+                        "title": "WiFi AP SSID",
+                        "type": "string"
+                    },
+                    {
+                        "children": [],
+                        "depends_on": null,
+                        "help": "AP password for WPA2 or empty for Open.",
+                        "id": "ESP_WIFI_AP_PASSWORD",
+                        "name": "ESP_WIFI_AP_PASSWORD",
+                        "range": null,
+                        "title": "WiFi AP Password",
+                        "type": "string"
+                    },
+                    {
+                        "children": [],
+                        "depends_on": null,
+                        "help": "Max number of the STA connects to AP.",
+                        "id": "MAX_STA_CONN",
+                        "name": "MAX_STA_CONN",
+                        "range": null,
+                        "title": "Maximal STA connections",
+                        "type": "int"
+                    },
+                    {
+                        "children": [],
+                        "depends_on": null,
+                        "help": "AP channel for better connection performance.",
+                        "id": "ESP_WIFI_AP_CHANNEL",
+                        "name": "ESP_WIFI_AP_CHANNEL",
+                        "range": null,
+                        "title": "WiFi AP Channel",
+                        "type": "string"
+                    },
+                    {
+                        "children": [],
+                        "depends_on": null,
+                        "help": "IP address that the ESP will assign to it's AP interface. You can use this IP to connect to the camera after flashing.",
+                        "id": "SERVER_IP",
+                        "name": "SERVER_IP",
+                        "range": null,
+                        "title": "WiFi AP IP Address",
+                        "type": "string"
+                    },
+                    {
+                        "children": [],
+                        "depends_on": null,
+                        "help": "Set the Maximum retry to avoid station reconnecting to the AP unlimited when the AP is really inexistent.",
+                        "id": "ESP_MAXIMUM_RETRY",
+                        "name": "ESP_MAXIMUM_RETRY",
+                        "range": null,
+                        "title": "Maximum retry",
+                        "type": "int"
+                    }
+                ],
+                "depends_on": null,
+                "id": "camera-web-server-wifi-settings",
+                "title": "WiFi Settings",
+                "type": "menu"
+            },
+            {
+                "children": [
+                    {
+                        "children": [
+                            {
+                                "children": [],
+                                "depends_on": "LED_ILLUMINATOR_ENABLED",
+                                "help": "Set a pin to illuminate an onboard LED or IR Illuminator when streaming or taking snapshots.",
+                                "id": "LED_LEDC_PIN",
+                                "name": "LED_LEDC_PIN",
+                                "range": null,
+                                "title": "LED Illuminator GPIO Pin",
+                                "type": "int"
+                            },
+                            {
+                                "children": [],
+                                "depends_on": "LED_ILLUMINATOR_ENABLED",
+                                "help": "Limit the maximum intensity of the LED while streaming to prevent overheating (0-255).",
+                                "id": "LED_MAX_INTENSITY",
+                                "name": "LED_MAX_INTENSITY",
+                                "range": null,
+                                "title": "LED Maximum Intensity (0-255)",
+                                "type": "int"
+                            },
+                            {
+                                "children": [
+                                    {
+                                        "children": [],
+                                        "depends_on": "<choice LED_LEDC_SPEED_MODE>",
+                                        "help": null,
+                                        "id": "LED_LEDC_LOW_SPEED_MODE",
+                                        "name": "LED_LEDC_LOW_SPEED_MODE",
+                                        "range": null,
+                                        "title": "LOW_SPEED_MODE",
+                                        "type": "bool"
+                                    },
+                                    {
+                                        "children": [],
+                                        "depends_on": "<choice LED_LEDC_SPEED_MODE>",
+                                        "help": null,
+                                        "id": "LED_LEDC_HIGH_SPEED_MODE",
+                                        "name": "LED_LEDC_HIGH_SPEED_MODE",
+                                        "range": null,
+                                        "title": "HIGH_SPEED_MODE",
+                                        "type": "bool"
+                                    }
+                                ],
+                                "depends_on": "LED_ILLUMINATOR_ENABLED",
+                                "help": "Select a speed mode for the LEDC channel",
+                                "id": "camera-web-server-led-illuminator-led-illuminator-enabled-select-ledc-timer-speed-mode",
+                                "name": "LED_LEDC_SPEED_MODE",
+                                "title": "Select LEDC Timer Speed Mode",
+                                "type": "choice"
+                            },
+                            {
+                                "children": [],
+                                "depends_on": "LED_ILLUMINATOR_ENABLED",
+                                "help": "Select the LEDC Timer (0-3)",
+                                "id": "LED_LEDC_TIMER",
+                                "name": "LED_LEDC_TIMER",
+                                "range": null,
+                                "title": "LEDC Timer",
+                                "type": "int"
+                            },
+                            {
+                                "children": [],
+                                "depends_on": "LED_ILLUMINATOR_ENABLED",
+                                "help": "Select the LEDC Channel (0-7)",
+                                "id": "LED_LEDC_CHANNEL",
+                                "name": "LED_LEDC_CHANNEL",
+                                "range": null,
+                                "title": "LEDC Channel",
+                                "type": "int"
+                            }
+                        ],
+                        "depends_on": null,
+                        "help": "Enable an LED Flash or IR Illuminator",
+                        "id": "LED_ILLUMINATOR_ENABLED",
+                        "name": "LED_ILLUMINATOR_ENABLED",
+                        "range": null,
+                        "title": "LED Illuminator Enabled",
+                        "type": "bool"
+                    }
+                ],
+                "depends_on": null,
+                "id": "camera-web-server-led-illuminator",
+                "title": "LED Illuminator",
+                "type": "menu"
+            },
+            {
+                "children": [
+                    {
+                        "children": [
+                            {
+                                "children": [],
+                                "depends_on": "<choice CAMERA_MODEL>",
+                                "help": null,
+                                "id": "CAMERA_MODEL_WROVER_KIT",
+                                "name": "CAMERA_MODEL_WROVER_KIT",
+                                "range": null,
+                                "title": "WROVER-KIT With OV2640 Module",
+                                "type": "bool"
+                            },
+                            {
+                                "children": [],
+                                "depends_on": "<choice CAMERA_MODEL>",
+                                "help": null,
+                                "id": "CAMERA_MODEL_ESP32_CAM_BOARD",
+                                "name": "CAMERA_MODEL_ESP32_CAM_BOARD",
+                                "range": null,
+                                "title": "ESP32 Camera Development Board",
+                                "type": "bool"
+                            },
+                            {
+                                "children": [],
+                                "depends_on": "<choice CAMERA_MODEL>",
+                                "help": null,
+                                "id": "CAMERA_MODEL_ESP_EYE",
+                                "name": "CAMERA_MODEL_ESP_EYE",
+                                "range": null,
+                                "title": "ESP_EYE DevKit",
+                                "type": "bool"
+                            },
+                            {
+                                "children": [],
+                                "depends_on": "<choice CAMERA_MODEL>",
+                                "help": null,
+                                "id": "CAMERA_MODEL_M5STACK_PSRAM",
+                                "name": "CAMERA_MODEL_M5STACK_PSRAM",
+                                "range": null,
+                                "title": "M5Stack Camera With PSRAM",
+                                "type": "bool"
+                            },
+                            {
+                                "children": [],
+                                "depends_on": "<choice CAMERA_MODEL>",
+                                "help": null,
+                                "id": "CAMERA_MODEL_M5STACK_WIDE",
+                                "name": "CAMERA_MODEL_M5STACK_WIDE",
+                                "range": null,
+                                "title": "M5Stack Camera F (Wide)",
+                                "type": "bool"
+                            },
+                            {
+                                "children": [],
+                                "depends_on": "<choice CAMERA_MODEL>",
+                                "help": null,
+                                "id": "CAMERA_MODEL_AI_THINKER",
+                                "name": "CAMERA_MODEL_AI_THINKER",
+                                "range": null,
+                                "title": "ESP32-CAM by AI-Thinker",
+                                "type": "bool"
+                            },
+                            {
+                                "children": [],
+                                "depends_on": "<choice CAMERA_MODEL>",
+                                "help": null,
+                                "id": "CAMERA_MODEL_CUSTOM",
+                                "name": "CAMERA_MODEL_CUSTOM",
+                                "range": null,
+                                "title": "Custom Camera Pinout",
+                                "type": "bool"
+                            }
+                        ],
+                        "depends_on": null,
+                        "help": "Select Camera Pinout.",
+                        "id": "camera-web-server-camera-pins-select-camera-pinout",
+                        "name": "CAMERA_MODEL",
+                        "title": "Select Camera Pinout",
+                        "type": "choice"
+                    },
+                    {
+                        "children": [],
+                        "depends_on": "CAMERA_MODEL_CUSTOM",
+                        "help": "Select Power Down pin or -1 for unmanaged.",
+                        "id": "CAMERA_PIN_PWDN",
+                        "name": "CAMERA_PIN_PWDN",
+                        "range": null,
+                        "title": "Power Down pin",
+                        "type": "int"
+                    },
+                    {
+                        "children": [],
+                        "depends_on": "CAMERA_MODEL_CUSTOM",
+                        "help": "Select Camera Reset pin or -1 for software reset.",
+                        "id": "CAMERA_PIN_RESET",
+                        "name": "CAMERA_PIN_RESET",
+                        "range": null,
+                        "title": "Reset pin",
+                        "type": "int"
+                    },
+                    {
+                        "children": [],
+                        "depends_on": "CAMERA_MODEL_CUSTOM",
+                        "help": "Select Camera XCLK pin.",
+                        "id": "CAMERA_PIN_XCLK",
+                        "name": "CAMERA_PIN_XCLK",
+                        "range": null,
+                        "title": "XCLK pin",
+                        "type": "int"
+                    },
+                    {
+                        "children": [],
+                        "depends_on": "CAMERA_MODEL_CUSTOM",
+                        "help": "Select Camera SIOD pin.",
+                        "id": "CAMERA_PIN_SIOD",
+                        "name": "CAMERA_PIN_SIOD",
+                        "range": null,
+                        "title": "SIOD pin",
+                        "type": "int"
+                    },
+                    {
+                        "children": [],
+                        "depends_on": "CAMERA_MODEL_CUSTOM",
+                        "help": "Select Camera SIOC pin.",
+                        "id": "CAMERA_PIN_SIOC",
+                        "name": "CAMERA_PIN_SIOC",
+                        "range": null,
+                        "title": "SIOC pin",
+                        "type": "int"
+                    },
+                    {
+                        "children": [],
+                        "depends_on": "CAMERA_MODEL_CUSTOM",
+                        "help": "Select Camera VSYNC pin.",
+                        "id": "CAMERA_PIN_VSYNC",
+                        "name": "CAMERA_PIN_VSYNC",
+                        "range": null,
+                        "title": "VSYNC pin",
+                        "type": "int"
+                    },
+                    {
+                        "children": [],
+                        "depends_on": "CAMERA_MODEL_CUSTOM",
+                        "help": "Select Camera HREF pin.",
+                        "id": "CAMERA_PIN_HREF",
+                        "name": "CAMERA_PIN_HREF",
+                        "range": null,
+                        "title": "HREF pin",
+                        "type": "int"
+                    },
+                    {
+                        "children": [],
+                        "depends_on": "CAMERA_MODEL_CUSTOM",
+                        "help": "Select Camera PCLK pin.",
+                        "id": "CAMERA_PIN_PCLK",
+                        "name": "CAMERA_PIN_PCLK",
+                        "range": null,
+                        "title": "PCLK pin",
+                        "type": "int"
+                    },
+                    {
+                        "children": [],
+                        "depends_on": "CAMERA_MODEL_CUSTOM",
+                        "help": "Select Camera Y2 pin.",
+                        "id": "CAMERA_PIN_Y2",
+                        "name": "CAMERA_PIN_Y2",
+                        "range": null,
+                        "title": "Y2 pin",
+                        "type": "int"
+                    },
+                    {
+                        "children": [],
+                        "depends_on": "CAMERA_MODEL_CUSTOM",
+                        "help": "Select Camera Y3 pin.",
+                        "id": "CAMERA_PIN_Y3",
+                        "name": "CAMERA_PIN_Y3",
+                        "range": null,
+                        "title": "Y3 pin",
+                        "type": "int"
+                    },
+                    {
+                        "children": [],
+                        "depends_on": "CAMERA_MODEL_CUSTOM",
+                        "help": "Select Camera Y4 pin.",
+                        "id": "CAMERA_PIN_Y4",
+                        "name": "CAMERA_PIN_Y4",
+                        "range": null,
+                        "title": "Y4 pin",
+                        "type": "int"
+                    },
+                    {
+                        "children": [],
+                        "depends_on": "CAMERA_MODEL_CUSTOM",
+                        "help": "Select Camera Y5 pin.",
+                        "id": "CAMERA_PIN_Y5",
+                        "name": "CAMERA_PIN_Y5",
+                        "range": null,
+                        "title": "Y5 pin",
+                        "type": "int"
+                    },
+                    {
+                        "children": [],
+                        "depends_on": "CAMERA_MODEL_CUSTOM",
+                        "help": "Select Camera Y6 pin.",
+                        "id": "CAMERA_PIN_Y6",
+                        "name": "CAMERA_PIN_Y6",
+                        "range": null,
+                        "title": "Y6 pin",
+                        "type": "int"
+                    },
+                    {
+                        "children": [],
+                        "depends_on": "CAMERA_MODEL_CUSTOM",
+                        "help": "Select Camera Y7 pin.",
+                        "id": "CAMERA_PIN_Y7",
+                        "name": "CAMERA_PIN_Y7",
+                        "range": null,
+                        "title": "Y7 pin",
+                        "type": "int"
+                    },
+                    {
+                        "children": [],
+                        "depends_on": "CAMERA_MODEL_CUSTOM",
+                        "help": "Select Camera Y8 pin.",
+                        "id": "CAMERA_PIN_Y8",
+                        "name": "CAMERA_PIN_Y8",
+                        "range": null,
+                        "title": "Y8 pin",
+                        "type": "int"
+                    },
+                    {
+                        "children": [],
+                        "depends_on": "CAMERA_MODEL_CUSTOM",
+                        "help": "Select Camera Y9 pin.",
+                        "id": "CAMERA_PIN_Y9",
+                        "name": "CAMERA_PIN_Y9",
+                        "range": null,
+                        "title": "Y9 pin",
+                        "type": "int"
+                    }
+                ],
+                "depends_on": null,
+                "id": "camera-web-server-camera-pins",
+                "title": "Camera Pins",
+                "type": "menu"
+            },
+            {
+                "children": [
+                    {
+                        "children": [],
+                        "depends_on": "ESP_FACE_DETECT_ENABLED",
+                        "help": "Enables ESP-WHO Face Recognition through the web interface.",
+                        "id": "ESP_FACE_RECOGNITION_ENABLED",
+                        "name": "ESP_FACE_RECOGNITION_ENABLED",
+                        "range": null,
+                        "title": "ESP-WHO Face Recognition",
+                        "type": "bool"
+                    }
+                ],
+                "depends_on": null,
+                "help": "Enables ESP-WHO Face Detection through the web interface.",
+                "id": "ESP_FACE_DETECT_ENABLED",
+                "name": "ESP_FACE_DETECT_ENABLED",
+                "range": null,
+                "title": "ESP-WHO Face Detection",
+                "type": "bool"
+            }
+        ],
+        "depends_on": null,
+        "id": "camera-web-server",
+        "title": "Camera Web Server",
+        "type": "menu"
+    },
+    {
+        "children": [
+            {
+                "children": [
+                    {
+                        "children": [],
                         "depends_on": "<choice COMPILER_OPTIMIZATION>",
                         "help": null,
                         "id": "COMPILER_OPTIMIZATION_DEBUG",
@@ -27281,6 +27745,247 @@
                 "depends_on": null,
                 "id": "component-config-camera-configuration",
                 "title": "Camera configuration",
+                "type": "menu"
+            },
+            {
+                "children": [
+                    {
+                        "children": [],
+                        "depends_on": null,
+                        "help": "Number of network interfaces to be served by the mDNS library.\nLowering this number helps to reduce some static RAM usage.",
+                        "id": "MDNS_MAX_INTERFACES",
+                        "name": "MDNS_MAX_INTERFACES",
+                        "range": [
+                            1,
+                            9
+                        ],
+                        "title": "Max number of interfaces",
+                        "type": "int"
+                    },
+                    {
+                        "children": [],
+                        "depends_on": null,
+                        "help": "Services take up a certain amount of memory, and allowing fewer\nservices to be open at the same time conserves memory. Specify\nthe maximum amount of services here.",
+                        "id": "MDNS_MAX_SERVICES",
+                        "name": "MDNS_MAX_SERVICES",
+                        "range": null,
+                        "title": "Max number of services",
+                        "type": "int"
+                    },
+                    {
+                        "children": [],
+                        "depends_on": null,
+                        "help": "Allows setting mDNS task priority. Please do not set the task priority\nhigher than priorities of system tasks. Compile time warning/error\nwould be emitted if the chosen task priority were too high.",
+                        "id": "MDNS_TASK_PRIORITY",
+                        "name": "MDNS_TASK_PRIORITY",
+                        "range": [
+                            1,
+                            255
+                        ],
+                        "title": "mDNS task priority",
+                        "type": "int"
+                    },
+                    {
+                        "children": [],
+                        "depends_on": null,
+                        "help": "Allows setting the length of mDNS action queue.",
+                        "id": "MDNS_ACTION_QUEUE_LEN",
+                        "name": "MDNS_ACTION_QUEUE_LEN",
+                        "range": [
+                            8,
+                            64
+                        ],
+                        "title": "Maximum actions pending to the server",
+                        "type": "int"
+                    },
+                    {
+                        "children": [],
+                        "depends_on": null,
+                        "help": "Allows setting mDNS task stacksize.",
+                        "id": "MDNS_TASK_STACK_SIZE",
+                        "name": "MDNS_TASK_STACK_SIZE",
+                        "range": null,
+                        "title": "mDNS task stack size",
+                        "type": "int"
+                    },
+                    {
+                        "children": [
+                            {
+                                "children": [],
+                                "depends_on": "<choice MDNS_TASK_AFFINITY>",
+                                "help": null,
+                                "id": "MDNS_TASK_AFFINITY_NO_AFFINITY",
+                                "name": "MDNS_TASK_AFFINITY_NO_AFFINITY",
+                                "range": null,
+                                "title": "No affinity",
+                                "type": "bool"
+                            },
+                            {
+                                "children": [],
+                                "depends_on": "<choice MDNS_TASK_AFFINITY>",
+                                "help": null,
+                                "id": "MDNS_TASK_AFFINITY_CPU0",
+                                "name": "MDNS_TASK_AFFINITY_CPU0",
+                                "range": null,
+                                "title": "CPU0",
+                                "type": "bool"
+                            },
+                            {
+                                "children": [],
+                                "depends_on": "!FREERTOS_UNICORE && <choice MDNS_TASK_AFFINITY>",
+                                "help": null,
+                                "id": "MDNS_TASK_AFFINITY_CPU1",
+                                "name": "MDNS_TASK_AFFINITY_CPU1",
+                                "range": null,
+                                "title": "CPU1",
+                                "type": "bool"
+                            }
+                        ],
+                        "depends_on": null,
+                        "help": "Allows setting mDNS tasks affinity, i.e. whether the task is pinned to\nCPU0, pinned to CPU1, or allowed to run on any CPU.",
+                        "id": "component-config-mdns-mdns-task-affinity",
+                        "name": "MDNS_TASK_AFFINITY",
+                        "title": "mDNS task affinity",
+                        "type": "choice"
+                    },
+                    {
+                        "children": [],
+                        "depends_on": null,
+                        "help": null,
+                        "id": "MDNS_TASK_AFFINITY",
+                        "name": "MDNS_TASK_AFFINITY",
+                        "range": null,
+                        "title": null,
+                        "type": "hex"
+                    },
+                    {
+                        "children": [],
+                        "depends_on": null,
+                        "help": "Configures timeout for adding a new mDNS service. Adding a service\nfails if could not be completed within this time.",
+                        "id": "MDNS_SERVICE_ADD_TIMEOUT_MS",
+                        "name": "MDNS_SERVICE_ADD_TIMEOUT_MS",
+                        "range": [
+                            10,
+                            30000
+                        ],
+                        "title": "mDNS adding service timeout (ms)",
+                        "type": "int"
+                    },
+                    {
+                        "children": [],
+                        "depends_on": null,
+                        "help": "Configures period of mDNS timer, which periodically transmits packets\nand schedules mDNS searches.",
+                        "id": "MDNS_TIMER_PERIOD_MS",
+                        "name": "MDNS_TIMER_PERIOD_MS",
+                        "range": [
+                            10,
+                            10000
+                        ],
+                        "title": "mDNS timer period (ms)",
+                        "type": "int"
+                    },
+                    {
+                        "children": [],
+                        "depends_on": null,
+                        "help": "Enables optional mDNS networking implementation using BSD sockets\nin UDP multicast mode.\nThis option creates a new thread to serve receiving packets (TODO).\nThis option uses additional N sockets, where N is number of interfaces.",
+                        "id": "MDNS_NETWORKING_SOCKET",
+                        "name": "MDNS_NETWORKING_SOCKET",
+                        "range": null,
+                        "title": "Use BSD sockets for mDNS networking",
+                        "type": "bool"
+                    },
+                    {
+                        "children": [],
+                        "depends_on": null,
+                        "help": "Enable only if the querier and the responder share the same IP address.\nThis usually happens in test mode, where we may run multiple instances of\nresponders/queriers on the same interface.",
+                        "id": "MDNS_SKIP_SUPPRESSING_OWN_QUERIES",
+                        "name": "MDNS_SKIP_SUPPRESSING_OWN_QUERIES",
+                        "range": null,
+                        "title": "Skip suppressing our own packets",
+                        "type": "bool"
+                    },
+                    {
+                        "children": [],
+                        "depends_on": null,
+                        "help": "Enable for the library to log received and sent mDNS packets to stdout.",
+                        "id": "MDNS_ENABLE_DEBUG_PRINTS",
+                        "name": "MDNS_ENABLE_DEBUG_PRINTS",
+                        "range": null,
+                        "title": "Enable debug prints of mDNS packets",
+                        "type": "bool"
+                    },
+                    {
+                        "children": [],
+                        "depends_on": null,
+                        "help": "Enable for the console cli to be available on the device.",
+                        "id": "MDNS_ENABLE_CONSOLE_CLI",
+                        "name": "MDNS_ENABLE_CONSOLE_CLI",
+                        "range": null,
+                        "title": "Enable Command Line Interface on device console",
+                        "type": "bool"
+                    },
+                    {
+                        "children": [],
+                        "depends_on": null,
+                        "help": "Enables support for IPv4 reverse lookup. If enabled, the mDNS library\nresponse to PTR queries of \"A.B.C.D.in-addr.arpa\" type.",
+                        "id": "MDNS_RESPOND_REVERSE_QUERIES",
+                        "name": "MDNS_RESPOND_REVERSE_QUERIES",
+                        "range": null,
+                        "title": "Enable responding to IPv4 reverse queries",
+                        "type": "bool"
+                    },
+                    {
+                        "children": [],
+                        "depends_on": null,
+                        "help": "Enables adding multiple service instances under the same service type.",
+                        "id": "MDNS_MULTIPLE_INSTANCE",
+                        "name": "MDNS_MULTIPLE_INSTANCE",
+                        "range": null,
+                        "title": "Multiple instances under the same service type",
+                        "type": "bool"
+                    },
+                    {
+                        "children": [
+                            {
+                                "children": [],
+                                "depends_on": null,
+                                "help": "Set up mDNS for the default WiFi station.\nDisable this option if you do not need mDNS on default WiFi STA.",
+                                "id": "MDNS_PREDEF_NETIF_STA",
+                                "name": "MDNS_PREDEF_NETIF_STA",
+                                "range": null,
+                                "title": "Use predefined interface for WiFi Station",
+                                "type": "bool"
+                            },
+                            {
+                                "children": [],
+                                "depends_on": null,
+                                "help": "Set up mDNS for the default WiFi Access Point.\nDisable this option if you do not need mDNS on default WiFi AP.",
+                                "id": "MDNS_PREDEF_NETIF_AP",
+                                "name": "MDNS_PREDEF_NETIF_AP",
+                                "range": null,
+                                "title": "Use predefined interface for WiFi Access Point",
+                                "type": "bool"
+                            },
+                            {
+                                "children": [],
+                                "depends_on": "ETH_ENABLED",
+                                "help": "Set up mDNS for the default Ethernet interface.\nDisable this option if you do not need mDNS on default Ethernet.",
+                                "id": "MDNS_PREDEF_NETIF_ETH",
+                                "name": "MDNS_PREDEF_NETIF_ETH",
+                                "range": null,
+                                "title": "Use predefined interface for Ethernet",
+                                "type": "bool"
+                            }
+                        ],
+                        "depends_on": null,
+                        "id": "component-config-mdns-mdns-predefined-interfaces",
+                        "title": "MDNS Predefined interfaces",
+                        "type": "menu"
+                    }
+                ],
+                "depends_on": null,
+                "id": "component-config-mdns",
+                "title": "mDNS",
                 "type": "menu"
             }
         ],

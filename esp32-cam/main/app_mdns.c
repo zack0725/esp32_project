@@ -31,6 +31,9 @@
 #include "esp_camera.h"
 #include "mdns.h"
 #include "app_camera.h"
+#include "esp_netif.h"
+#include "esp_system.h"
+#include "esp_mac.h"
 
 static const char *TAG = "camera mdns";
 
@@ -88,11 +91,12 @@ const char * app_mdns_query(size_t * out_len)
     *p++ = '[';
 
     //首先添加自己的数据
-    tcpip_adapter_ip_info_t ip;
+    esp_netif_ip_info_t ip;
     if (strlen(CONFIG_ESP_WIFI_SSID)) {
-    	tcpip_adapter_get_ip_info(TCPIP_ADAPTER_IF_STA, &ip);
+    	// esp_netif_get_ip_info(TCPIP_ADAPTER_IF_STA, &ip);
+        esp_netif_get_ip_info(ESP_IF_WIFI_STA, &ip);
     } else {
-    	tcpip_adapter_get_ip_info(TCPIP_ADAPTER_IF_AP, &ip);
+    	esp_netif_get_ip_info(ESP_IF_WIFI_AP, &ip);
     }
     *p++ = '{';
     p += sprintf(p, "\"instance\":\"%s\",", iname);
@@ -142,7 +146,7 @@ const char * app_mdns_query(size_t * out_len)
         }
         a = r->addr;
         while(a){
-            if(a->addr.type != IPADDR_TYPE_V6){
+            if(a->addr.type != ESP_IPADDR_TYPE_V6){
                 p += sprintf(p, "\"ip\":\"" IPSTR "\",", IP2STR(&(a->addr.u_addr.ip4)));
             	p += sprintf(p, "\"id\":\"" IPSTR ":%u\",", IP2STR(&(a->addr.u_addr.ip4)), r->port);
                 break;
@@ -177,7 +181,6 @@ void app_mdns_update_framesize(int size)
         ESP_LOGE(TAG, "mdns_service_txt_item_set() framesize Failed");
     }
 }
-
 void app_mdns_main()
 {	
     uint8_t mac[6];
