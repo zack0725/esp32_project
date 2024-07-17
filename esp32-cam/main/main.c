@@ -28,14 +28,14 @@
 void app_main()
 {
     //初始化并连接wifi
-    // app_wifi_main();
+    app_wifi_main();
 
     //初始化摄像头
     app_camera_main();
 
     //初始化服务端程序
-    //app_httpd_main();
+    // app_httpd_main();
 
     //添加mdns服务和摄像头主机发现
-    app_mdns_main();
+    // app_mdns_main();
 }

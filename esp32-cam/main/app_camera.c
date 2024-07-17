@@ -74,7 +74,6 @@ void app_camera_main ()
         default: break;
     }
 #endif
-
     camera_config_t config;
     config.ledc_channel = LEDC_CHANNEL_0;
     config.ledc_timer = LEDC_TIMER_0;
@@ -113,7 +112,7 @@ void app_camera_main ()
     //翻转回去
     s->set_vflip(s, 1);
     //初始化传感器垂直翻转，颜色有点饱和
-    if (s->id.PID == OV3660_PID) {
+    if (s->id.PID == OV5640_PID) {
         s->set_brightness(s, 1);//增加一点亮度
         s->set_saturation(s, -2);//降低饱和度
     }

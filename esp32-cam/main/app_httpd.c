@@ -317,7 +317,7 @@ static esp_err_t bmp_handler(httpd_req_t *req)
     httpd_resp_set_hdr(req, "Access-Control-Allow-Origin", "*");
 
     char ts[32];
-    snprintf(ts, 32, "%ld.%06ld", fb->timestamp.tv_sec, fb->timestamp.tv_usec);
+    snprintf(ts, 32, "%lld.%06ld", fb->timestamp.tv_sec, fb->timestamp.tv_usec);
     httpd_resp_set_hdr(req, "X-Timestamp", (const char *)ts);
 
 
@@ -381,7 +381,7 @@ static esp_err_t capture_handler(httpd_req_t *req)
     httpd_resp_set_hdr(req, "Access-Control-Allow-Origin", "*");
 
     char ts[32];
-    snprintf(ts, 32, "%ld.%06ld", fb->timestamp.tv_sec, fb->timestamp.tv_usec);
+    snprintf(ts, 32, "%lld.%06ld", fb->timestamp.tv_sec, fb->timestamp.tv_usec);
     httpd_resp_set_hdr(req, "X-Timestamp", (const char *)ts);
 
 #if CONFIG_ESP_FACE_DETECT_ENABLED
@@ -408,7 +408,7 @@ static esp_err_t capture_handler(httpd_req_t *req)
         }
         esp_camera_fb_return(fb);
         int64_t fr_end = esp_timer_get_time();
-        ESP_LOGI(TAG, "JPG: %uB %ums", (uint32_t)(fb_len), (uint32_t)((fr_end - fr_start) / 1000));
+        ESP_LOGI(TAG, "JPG: %uB %ums", (uint)(fb_len), (uint)((fr_end - fr_start) / 1000));
         return res;
 #if CONFIG_ESP_FACE_DETECT_ENABLED
     }
@@ -466,7 +466,7 @@ static esp_err_t capture_handler(httpd_req_t *req)
     }
 
     int64_t fr_end = esp_timer_get_time();
-    ESP_LOGI(TAG, "FACE: %uB %ums %s%d", (uint32_t)(jchunk.len), (uint32_t)((fr_end - fr_start) / 1000), detected ? "DETECTED " : "", face_id);
+    ESP_LOGI(TAG, "FACE: %uB %ums %s%d", (uint)(jchunk.len), (uint)((fr_end - fr_start) / 1000), detected ? "DETECTED " : "", face_id);
     return res;
 #endif
 }
@@ -676,12 +676,12 @@ static esp_err_t stream_handler(httpd_req_t *req)
                       ", %u+%u+%u+%u=%u %s%d"
 #endif
                  ,
-                 (uint32_t)(_jpg_buf_len),
-                 (uint32_t)frame_time, 1000.0 / (uint32_t)frame_time,
-                 avg_frame_time, 1000.0 / avg_frame_time
+                 (uint)(_jpg_buf_len),
+                 (uint)frame_time, 1000.0 / (uint)frame_time,
+                 (uint)avg_frame_time, 1000.0 / (uint)avg_frame_time
 #if CONFIG_ESP_FACE_DETECT_ENABLED
                  ,
-                 (uint32_t)ready_time, (uint32_t)face_time, (uint32_t)recognize_time, (uint32_t)encode_time, (uint32_t)process_time,
+                 (uint)ready_time, (uint)face_time, (uint)recognize_time, (uint)encode_time, (uint)process_time,
                  (detected) ? "DETECTED " : "", face_id
 #endif
         );

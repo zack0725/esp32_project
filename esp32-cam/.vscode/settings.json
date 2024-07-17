@@ -11,7 +11,7 @@
     "idf.openOcdConfigs": [
         "board/esp32-wrover-kit-3.3v.cfg"
     ],
-    "idf.portWin": "COM1",
+    "idf.portWin": "COM18",
     "idf.pythonBinPathWin": "d:\\Programs\\esp\\.espressif\\python_env\\idf5.2_py3.11_env\\Scripts\\python.exe",
     "idf.toolsPathWin": "d:\\Programs\\esp\\.espressif",
     "files.associations": {
@@ -29,6 +29,7 @@
         "nvs_flash.h": "c",
         "esp_netif.h": "c",
         "esp_system.h": "c",
-        "esp_mac.h": "c"
+        "esp_mac.h": "c",
+        "cstdint": "c"
     }
 }
