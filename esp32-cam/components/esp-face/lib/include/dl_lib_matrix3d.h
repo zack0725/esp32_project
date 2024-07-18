@@ -90,18 +90,20 @@ typedef struct
  * @param align Align of memory. If not required, set 0.
  * @return Pointer of allocated memory. Null for failed.
  */
+#include "esp_heap_caps.h"
 static void *dl_lib_calloc(int cnt, int size, int align)
 {
     int total_size = cnt * size + align + sizeof(void *);
     void *res = malloc(total_size);
     if (NULL == res)
     {
-#if DL_SPIRAM_SUPPORT
+#if 1 //DL_SPIRAM_SUPPORT
+        //res = heap_caps_malloc(total_size, MALLOC_CAP_8BIT | MALLOC_CAP_SPIRAM);
         res = heap_caps_malloc(total_size, MALLOC_CAP_8BIT | MALLOC_CAP_SPIRAM);
     }
     if (NULL == res)
     {
-        printf("Item psram alloc failed. Size: %d x %d\n", cnt, size);
+        printf("Item psram alloc failed. Size: %d x %d; free = %d\n", cnt, size,heap_caps_get_free_size(MALLOC_CAP_8BIT));
 #else
         printf("Item alloc failed. Size: %d x %d, SPIRAM_FLAG: %d\n", cnt, size, DL_SPIRAM_SUPPORT);
 #endif

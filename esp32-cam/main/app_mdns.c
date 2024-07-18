@@ -257,7 +257,6 @@ void app_mdns_main()
         return;
     }
 
-
     mdns_txt_item_t camera_txt_data[] = {
         {(char*)"board"         ,(char*)CAM_BOARD}, //开发板
         {(char*)"model"     	,(char*)model},     //摄像头类型
@@ -271,7 +270,6 @@ void app_mdns_main()
         ESP_LOGE(TAG, "mdns_service_add() ESP-CAM Failed");
         return;
     }
-
     //创建mdns任务
     xTaskCreate(mdns_task, "mdns-cam", 2048, NULL, 2, NULL);
 }

@@ -30,6 +30,23 @@
         "esp_netif.h": "c",
         "esp_system.h": "c",
         "esp_mac.h": "c",
-        "cstdint": "c"
-    }
+        "cstdint": "c",
+        "freertos.h": "c",
+        "task.h": "c",
+        "event_groups.h": "c",
+        "dl_lib_matrix3d.h": "c",
+        "esp_heap_caps.h": "c",
+        "array": "c",
+        "bitset": "c",
+        "string_view": "c",
+        "format": "c",
+        "initializer_list": "c",
+        "span": "c",
+        "regex": "c",
+        "esp_cpu.h": "c",
+        "stdint.h": "c",
+        "soc_caps.h": "c",
+        "system_internal.h": "c"
+    },
+    "idf.flashType": "UART"
 }
