@@ -24,7 +24,7 @@ config ESP_WIFI_AP_SSID
 
 config ESP_WIFI_AP_PASSWORD
     string "WiFi AP Password"
-    default ""
+    default "123456"
     help
     AP password for WPA2 or empty for Open.        
 
