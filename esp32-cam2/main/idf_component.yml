@@ -1,0 +1,18 @@
+dependencies:
+  espressif/mdns: "*"
+  espressif/esp32-camera:
+    version: "*"
+    override_path: "../components/esp32-camera/"
+    
+  esp-face:
+    version: "*"
+    path: "../components/esp-face/"
+    
+  esp-sr:
+    version: "*"
+    path: "../components/esp-sr/"
+
+  fb_gfx:
+    version: "*"
+    path: "../components/fb_gfx/"
+  
