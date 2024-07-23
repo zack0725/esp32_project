@@ -16,7 +16,6 @@ if("${CONFIG}" STREQUAL "" OR "${CONFIG}" STREQUAL "")
   "flash_bootloader_args"
   "flash_project_args"
   "flasher_args.json"
-  "index_ov2640.html.gz.S"
   "index_ov5640.html.gz.S"
   "ldgen_libraries"
   "ldgen_libraries.in"

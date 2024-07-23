@@ -13,7 +13,6 @@
 // limitations under the License.
 #include "app_httpd.h"
 #include "esp_http_server.h"
-#include "esp_timer.h"
 #include "esp_camera.h"
 #include "img_converters.h"
 #include "fb_gfx.h"
@@ -21,6 +20,7 @@
 #include "sdkconfig.h"
 #include "app_mdns.h"
 #include "app_camera.h"
+#include "esp_timer.h"
 
 #if defined(ARDUINO_ARCH_ESP32) && defined(CONFIG_ARDUHAL_ESP_LOG)
 #include "esp32-hal-log.h"
@@ -136,7 +136,6 @@ static esp_err_t bmp_handler(httpd_req_t *req)
     char ts[32];
     snprintf(ts, 32, "%lld.%06ld", fb->timestamp.tv_sec, fb->timestamp.tv_usec);
     httpd_resp_set_hdr(req, "X-Timestamp", (const char *)ts);
-
 
     uint8_t * buf = NULL;
     size_t buf_len = 0;
@@ -478,8 +477,8 @@ static esp_err_t status_handler(httpd_req_t *req)
         for(int reg = 0x3400; reg < 0x3406; reg+=2){
             p+=print_reg(p, s, reg, 0xFFF);//12 bit
         }
+        
         p+=print_reg(p, s, 0x3406, 0xFF);
-
         p+=print_reg(p, s, 0x3500, 0xFFFF0);//16 bit
         p+=print_reg(p, s, 0x3503, 0xFF);
         p+=print_reg(p, s, 0x350a, 0x3FF);//10 bit

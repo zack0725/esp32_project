@@ -5247,27 +5247,6 @@
                 "id": "camera-web-server-camera-pins",
                 "title": "Camera Pins",
                 "type": "menu"
-            },
-            {
-                "children": [
-                    {
-                        "children": [],
-                        "depends_on": "ESP_FACE_DETECT_ENABLED",
-                        "help": "Enables ESP-WHO Face Recognition through the web interface.",
-                        "id": "ESP_FACE_RECOGNITION_ENABLED",
-                        "name": "ESP_FACE_RECOGNITION_ENABLED",
-                        "range": null,
-                        "title": "ESP-WHO Face Recognition",
-                        "type": "bool"
-                    }
-                ],
-                "depends_on": null,
-                "help": "Enables ESP-WHO Face Detection through the web interface.",
-                "id": "ESP_FACE_DETECT_ENABLED",
-                "name": "ESP_FACE_DETECT_ENABLED",
-                "range": null,
-                "title": "ESP-WHO Face Detection",
-                "type": "bool"
             }
         ],
         "depends_on": null,

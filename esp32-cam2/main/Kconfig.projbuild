@@ -24,7 +24,7 @@ config ESP_WIFI_AP_SSID
 
 config ESP_WIFI_AP_PASSWORD
     string "WiFi AP Password"
-    default "123456"
+    default ""
     help
     AP password for WPA2 or empty for Open.        
 
@@ -297,18 +297,4 @@ config CAMERA_PIN_Y9
         Select Camera Y9 pin.
 
 endmenu
-
-config ESP_FACE_DETECT_ENABLED
-    bool "ESP-WHO Face Detection"
-    default y
-    help
-        Enables ESP-WHO Face Detection through the web interface.
-
-config ESP_FACE_RECOGNITION_ENABLED
-    bool "ESP-WHO Face Recognition"
-    depends on ESP_FACE_DETECT_ENABLED
-    default y
-    help
-        Enables ESP-WHO Face Recognition through the web interface.
-
 endmenu

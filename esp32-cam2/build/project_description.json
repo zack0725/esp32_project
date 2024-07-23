@@ -1,7 +1,7 @@
 {
     "version":            "1.1",
     "project_name":       "esp32-cam",
-    "project_version":    "8b76e63-dirty",
+    "project_version":    "63a669f-dirty",
     "project_path":       "F:/project/esp32_project/esp32-cam2",
     "idf_path":           "D:/Programs/esp/Espressif/frameworks/esp-idf-v5.2.2",
     "build_dir":          "F:/project/esp32_project/esp32-cam2/build",
@@ -880,7 +880,7 @@
             "managed_reqs": [],
             "managed_priv_reqs": [ "esp-face", "esp-sr", "esp32-camera", "espressif__mdns", "fb_gfx" ],
             "file": "F:/project/esp32_project/esp32-cam2/build/esp-idf/main/libmain.a",
-            "sources": [ "F:/project/esp32_project/esp32-cam2/main/main.c", "F:/project/esp32_project/esp32-cam2/main/app_wifi.c", "F:/project/esp32_project/esp32-cam2/main/app_camera.c", "F:/project/esp32_project/esp32-cam2/main/app_httpd.c", "F:/project/esp32_project/esp32-cam2/main/app_mdns.c", "F:/project/esp32_project/esp32-cam2/build/index_ov2640.html.gz.S", "F:/project/esp32_project/esp32-cam2/build/index_ov5640.html.gz.S", "F:/project/esp32_project/esp32-cam2/build/monitor.html.gz.S" ],
+            "sources": [ "F:/project/esp32_project/esp32-cam2/main/main.c", "F:/project/esp32_project/esp32-cam2/main/app_wifi.c", "F:/project/esp32_project/esp32-cam2/main/app_camera.c", "F:/project/esp32_project/esp32-cam2/main/app_httpd.c", "F:/project/esp32_project/esp32-cam2/main/app_mdns.c", "F:/project/esp32_project/esp32-cam2/build/index_ov5640.html.gz.S", "F:/project/esp32_project/esp32-cam2/build/monitor.html.gz.S" ],
             "include_dirs": [ "include" ]
         },
         "mbedtls": {

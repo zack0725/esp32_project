@@ -81,7 +81,6 @@ static void mdns_task(void * arg)
 /*
 *  公共方法
 */
-
 //mdns查询
 const char * app_mdns_query(size_t * out_len)
 {
