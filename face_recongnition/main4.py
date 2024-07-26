@@ -1,12 +1,13 @@
-import os
+import os,threading,sys,cv2
 import numpy as np
-import cv2
-import sys
-from PyQt6.QtWidgets import QApplication, QWidget, QMainWindow, QVBoxLayout, QPushButton, QHBoxLayout, QLabel, QFileDialog
-from PyQt6.QtCore import Qt, QTimer, QPoint
+from PyQt6.QtWidgets import  QApplication, QWidget, QMainWindow, QVBoxLayout, QPushButton, QHBoxLayout, QLabel, QFileDialog
+from PyQt6.QtCore import Qt, QTimer, QPoint, QObject, pyqtSignal
 from PyQt6.QtGui import QPixmap, QImage, qRgb
-import fileUpLoad,faceCongnition
+from datetime import datetime
 
+import fileUpLoad,faceCongnition,faceUpload
+
+stranger_path = 'person/stranger/'
 face_handl = faceCongnition.FaceRecongnition()
 
 def start_cpature():
@@ -20,6 +21,31 @@ def start_cpature():
     #设置FPS
     cap.set(cv2.CAP_PROP_FPS, 30)
     return cap
+
+class VideoThread(QObject):
+    change_pixmap_signal = pyqtSignal(QImage)
+    def __init__(self):
+        super().__init__()
+        self._run_flag = True
+
+    def run(self):
+        cap = start_cpature()
+        # while self._run_flag:
+        ret, frame = cap.read()
+        if not ret:
+            return
+        frame = face_handl.face_handle(frame)
+        # OpenCV 图片转换为 QImage
+        height, width, channel = frame.shape
+        bytes_per_line = channel * width
+        # 将 QImage 转换为 QPixmap 显示在 QLabel 上
+        q_frame = QImage(frame.data, width, height, bytes_per_line, QImage.Format.Format_RGB888)
+        self.change_pixmap_signal.emit(q_frame)
+        cap.release()
+    
+    def stop(self):
+        self._run_flag = False
+
 
 class MainWindow(QMainWindow):
 
@@ -65,48 +91,63 @@ class MainWindow(QMainWindow):
 
         self.button3 = QPushButton('捕获人脸')
         self.button3.clicked.connect(self.face_capture)
+        self.button3.setEnabled(False)
         button_layout.addWidget(self.button3)
 
         self.button4 = QPushButton('导入人脸')
         self.button4.clicked.connect(self.file_upoload)
         button_layout.addWidget(self.button4)
 
-        self.timer.timeout.connect(self.update_frame)
         
 
     def start_video(self):
-        if not self.cap.isOpened():
-            self.cap = start_cpature()
-        self.timer.start(50) 
         self.start_button.setEnabled(False)
         self.stop_button.setEnabled(True)
+        self.button3.setEnabled(True)
+        self.thread = VideoThread()
+        self.thread.change_pixmap_signal.connect(self.update_frame)
+        
+        self.timer.timeout.connect(self.thread.run)
+        self.timer.start(50) 
 
     def stop_video(self):
         self.timer.stop()
-        self.cap.release()
+        self.thread.stop()
         self.video_label.clear()
         self.start_button.setEnabled(True)
         self.stop_button.setEnabled(False)
+        self.button3.setEnabled(False)
 
-    def update_frame(self):
-        ret, frame = self.cap.read()
-        if not ret:
-            return
-        frame = face_handl.face_handle(frame)
-        # 加载并显示图片
-        # OpenCV 图片转换为 QImage
-        height, width, channel = frame.shape
-        bytes_per_line = channel * width
-        # 将 QImage 转换为 QPixmap 显示在 QLabel 上
-        q_frame = QImage(frame.data, width, height, bytes_per_line, QImage.Format.Format_RGB888)
+    def update_frame(self, frame):
+        # ret, frame = self.cap.read()
+        # if not ret:
+        #     return
+        # frame = face_handl.face_handle(frame)
+        # # 加载并显示图片
+        # # OpenCV 图片转换为 QImage
+        # height, width, channel = frame.shape
+        # bytes_per_line = channel * width
+        # # 将 QImage 转换为 QPixmap 显示在 QLabel 上
+        # q_frame = QImage(frame.data, width, height, bytes_per_line, QImage.Format.Format_RGB888)
         # 调整图像大小
+        q_frame = QPixmap.fromImage(frame)
         q_frame = q_frame.scaled(self.video_label.width(), self.video_label.height(), Qt.AspectRatioMode.KeepAspectRatio)
-        q_frame = QPixmap.fromImage(q_frame)
         self.video_label.setPixmap(q_frame)
     
     # 捕获人脸
     def face_capture(self):
-        pass
+        ret,frame = self.cap.read()
+        if not ret:
+            return
+        out_path = stranger_path + datetime.now().strftime("%Y%m%d%H%M%S") + '.jpg'
+        cv2.imwrite(out_path, frame)
+        # qpoint = QPoint(self.mWindow_pos_x, self.mWindow_pos_y)
+        face_window = faceUpload.FaceUpload(out_path)
+        face_window_center = self.rect().center() - face_window.rect().center() 
+        face_window.move(face_window_center)
+        face_window.exec()
+        if os.path.exists(out_path):
+            os.remove(out_path)
 
     # 人脸上传
     def file_upoload(self):
@@ -115,6 +156,10 @@ class MainWindow(QMainWindow):
         file_window_center = self.rect().center() - file_window.rect().center() + qpoint
         file_window.move(file_window_center)
         file_window.exec()
+
+    def closeEvent(self, event):
+        self.thread.stop()
+        event.accept()
 
 def main():
     app = QApplication(sys.argv)

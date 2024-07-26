@@ -1,9 +1,13 @@
-import sys
+import sys,os
 from PyQt6.QtWidgets import QApplication, QWidget, QDialog, QPushButton, QVBoxLayout, QLabel, QFileDialog
 from PyQt6.QtCore import Qt
 from PyQt6.QtGui import QPixmap
 import faceUpload
+from PIL import Image
+from datetime import datetime
+from pathlib import Path
 
+stranger_path = 'person/stranger/'
 class FileUpload(QDialog):
     def __init__(self):
         super().__init__()
@@ -44,11 +48,15 @@ class FileUpload(QDialog):
 
     def upload_file(self):
         try:
-            # self.close()
+            image = Image.open(self.file_path)
+            out_path = stranger_path + datetime.now().strftime("%Y%m%d%H%M%S") + Path(self.file_path).suffix
+            image.save(out_path)
             # qpoint = QPoint(self.mWindow_pos_x, self.mWindow_pos_y)
-            face_window = face_window.FileUpload(self.file_path)
+            face_window = faceUpload.FaceUpload(out_path)
             face_window_center = self.rect().center() - face_window.rect().center() 
             face_window.move(face_window_center)
             face_window.exec()
-        except AttributeError:
-            print('请先选择文件')
+            if os.path.exists(out_path):
+                os.remove(out_path)
+        except AttributeError as e:
+            print(f"AttributeError occurred: {e}")  
