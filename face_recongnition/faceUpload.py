@@ -127,20 +127,3 @@ class FaceUpload(QDialog):
         with open(self.datapickle_path, 'wb') as f:
             pickle.dump(self.face_encodings, f)
 
-    def face_compare():
-        pass
-        # #获取图片
-        # image = face_recognition.load_image_file('person/recongnition/leijun.jpg')
-        # #找到人脸的位置
-        # face_locations = face_recognition.face_locations(image)
-        # #获取图像中所有人脸的编码
-        # face_encoding = face_recognition.face_encodings(image,face_locations)
-        # #比对人脸
-        # matches = face_recognition.compare_faces(face_encodings['leijun'],face_encoding)
-        # print(face_locations)
-        # for (top, right, bottom, left), face_encoding in zip(face_locations, face_encodings):
-        #     if True in matches:
-        #         cv2.rectangle(image, (left, top), (right, bottom), (0, 0, 255), 2)
-        #         cv2.putText(image, 'leijun', (left + 6, bottom - 6), cv2.FONT_HERSHEY_DUPLEX, 0.5, (255, 255, 255), 1)
-
-

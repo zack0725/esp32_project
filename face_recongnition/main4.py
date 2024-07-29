@@ -1,7 +1,7 @@
-import os,threading,sys,cv2
+import os, threading, sys, cv2, requests
 import numpy as np
 from PyQt6.QtWidgets import  QApplication, QWidget, QMainWindow, QVBoxLayout, QPushButton, QHBoxLayout, QLabel, QFileDialog
-from PyQt6.QtCore import Qt, QTimer, QPoint, QObject, pyqtSignal
+from PyQt6.QtCore import Qt, QTimer, QPoint, QThread,  QWaitCondition, QMutex, pyqtSignal, QMutexLocker
 from PyQt6.QtGui import QPixmap, QImage, qRgb
 from datetime import datetime
 
@@ -22,40 +22,56 @@ def start_cpature():
     cap.set(cv2.CAP_PROP_FPS, 30)
     return cap
 
-class VideoThread(QObject):
+class VideoThread(QThread):
     change_pixmap_signal = pyqtSignal(QImage)
     def __init__(self):
         super().__init__()
         self._run_flag = True
+        self.cap = cv2.VideoCapture()
+        self.is_paused = bool(0)    #标记线程是否暂停
+        self.mutex = QMutex()   #互斥锁，用于线程同步
+        self.cond = QWaitCondition()    #等待条件，用于线程恢复和暂停
+
+    def pause_thread(self):
+        with QMutexLocker(self.mutex):
+            self.is_paused = True   #设置线程为暂停状态
+            self.cap.release()
+    
+    def resume_thread(self):
+        if self.is_paused:
+            with QMutexLocker(self.mutex):
+                self.is_paused = False  #设置线程为非暂停状态
+                self.cap = start_cpature()
+                self.cond.wakeOne() #唤醒一个等待的线程
 
     def run(self):
-        cap = start_cpature()
-        # while self._run_flag:
-        ret, frame = cap.read()
-        if not ret:
-            return
-        frame = face_handl.face_handle(frame)
-        # OpenCV 图片转换为 QImage
-        height, width, channel = frame.shape
-        bytes_per_line = channel * width
-        # 将 QImage 转换为 QPixmap 显示在 QLabel 上
-        q_frame = QImage(frame.data, width, height, bytes_per_line, QImage.Format.Format_RGB888)
-        self.change_pixmap_signal.emit(q_frame)
-        cap.release()
-    
-    def stop(self):
-        self._run_flag = False
-
+        self.cap = start_cpature()
+        while True:
+            with QMutexLocker(self.mutex):
+                while self.is_paused:
+                    self.cond.wait(self.mutex)  # 当线程暂停时，等待条件满足
+                ret, frame = self.cap.read()
+                if not ret:
+                    return
+                frame = face_handl.face_handle(frame)
+                # OpenCV 图片转换为 QImage
+                height, width, channel = frame.shape
+                bytes_per_line = channel * width
+                # 将 QImage 转换为 QPixmap 显示在 QLabel 上
+                q_frame = QImage(frame.data, width, height, bytes_per_line, QImage.Format.Format_RGB888)
+                self.change_pixmap_signal.emit(q_frame)
 
 class MainWindow(QMainWindow):
 
     mWindow_pos_x = 900
     mWindow_pos_y = 400
     cap = cv2.VideoCapture()
-    timer = QTimer()
 
     def __init__(self):
         super().__init__()
+        self.thread_running = False  # 标记线程是否正在运行
+        self.video_thread = VideoThread()
+        self.video_thread.change_pixmap_signal.connect(self.update_frame)
         self.setWindowTitle('OpenCV 图片显示')
         self.setGeometry(self.mWindow_pos_x, self.mWindow_pos_y, 800, 500)
         
@@ -98,57 +114,40 @@ class MainWindow(QMainWindow):
         self.button4.clicked.connect(self.file_upoload)
         button_layout.addWidget(self.button4)
 
-        
-
     def start_video(self):
         self.start_button.setEnabled(False)
         self.stop_button.setEnabled(True)
         self.button3.setEnabled(True)
-        self.thread = VideoThread()
-        self.thread.change_pixmap_signal.connect(self.update_frame)
-        
-        self.timer.timeout.connect(self.thread.run)
-        self.timer.start(50) 
+        self.video_thread.start()
 
     def stop_video(self):
-        self.timer.stop()
-        self.thread.stop()
         self.video_label.clear()
         self.start_button.setEnabled(True)
         self.stop_button.setEnabled(False)
         self.button3.setEnabled(False)
+        self.video_thread.exit()
 
     def update_frame(self, frame):
-        # ret, frame = self.cap.read()
-        # if not ret:
-        #     return
-        # frame = face_handl.face_handle(frame)
-        # # 加载并显示图片
-        # # OpenCV 图片转换为 QImage
-        # height, width, channel = frame.shape
-        # bytes_per_line = channel * width
-        # # 将 QImage 转换为 QPixmap 显示在 QLabel 上
-        # q_frame = QImage(frame.data, width, height, bytes_per_line, QImage.Format.Format_RGB888)
-        # 调整图像大小
         q_frame = QPixmap.fromImage(frame)
         q_frame = q_frame.scaled(self.video_label.width(), self.video_label.height(), Qt.AspectRatioMode.KeepAspectRatio)
         self.video_label.setPixmap(q_frame)
     
     # 捕获人脸
     def face_capture(self):
-        ret,frame = self.cap.read()
-        if not ret:
-            return
+        self.video_thread.pause_thread()
+        img_src = 'http://192.168.4.1/capture'
+        response = requests.get(img_src)
         out_path = stranger_path + datetime.now().strftime("%Y%m%d%H%M%S") + '.jpg'
-        cv2.imwrite(out_path, frame)
-        # qpoint = QPoint(self.mWindow_pos_x, self.mWindow_pos_y)
+        with open(out_path,'wb') as file_obj:
+            file_obj.write(response.content)
         face_window = faceUpload.FaceUpload(out_path)
         face_window_center = self.rect().center() - face_window.rect().center() 
         face_window.move(face_window_center)
         face_window.exec()
         if os.path.exists(out_path):
             os.remove(out_path)
-
+        self.video_thread.resume_thread()
+            
     # 人脸上传
     def file_upoload(self):
         qpoint = QPoint(self.mWindow_pos_x, self.mWindow_pos_y)
@@ -158,7 +157,7 @@ class MainWindow(QMainWindow):
         file_window.exec()
 
     def closeEvent(self, event):
-        self.thread.stop()
+        self.video_thread.quit()
         event.accept()
 
 def main():
