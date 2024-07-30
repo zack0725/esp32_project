@@ -12,7 +12,7 @@ class FileUpload(QDialog):
     def __init__(self):
         super().__init__()
         self.setWindowTitle('文件上传工具')
-        self.setGeometry(100, 100, 300, 150)
+        self.setGeometry(500, 300, 300, 150)
 
         self.layout = QVBoxLayout()
 
@@ -47,16 +47,17 @@ class FileUpload(QDialog):
                 self.file_label.setText(f'已选择文件：{self.file_path}')
 
     def upload_file(self):
+        image = Image.open(self.file_path)
+        out_path = stranger_path + datetime.now().strftime("%Y%m%d%H%M%S") + Path(self.file_path).suffix
         try:
-            image = Image.open(self.file_path)
-            out_path = stranger_path + datetime.now().strftime("%Y%m%d%H%M%S") + Path(self.file_path).suffix
             image.save(out_path)
-            # qpoint = QPoint(self.mWindow_pos_x, self.mWindow_pos_y)
-            face_window = faceUpload.FaceUpload(out_path)
-            face_window_center = self.rect().center() - face_window.rect().center() 
-            face_window.move(face_window_center)
-            face_window.exec()
-            if os.path.exists(out_path):
-                os.remove(out_path)
         except AttributeError as e:
-            print(f"AttributeError occurred: {e}")  
+            img = img.convert('RGB')
+            # 保存为 JPG 文件
+            img.save(out_path, 'JPEG', quality=95)
+        face_window = faceUpload.FaceUpload(out_path)
+        face_window_center = self.rect().center() - face_window.rect().center() 
+        face_window.move(face_window_center)
+        face_window.exec()
+        if os.path.exists(out_path):
+            os.remove(out_path)

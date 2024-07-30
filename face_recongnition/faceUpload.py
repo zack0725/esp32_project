@@ -42,7 +42,7 @@ class FaceUpload(QDialog):
 
     def initUI(self):
         self.setWindowTitle('文件上传工具')
-        self.setGeometry(100, 100, 300, 150)
+        self.setGeometry(800, 500, 300, 150)
 
         self.layout = QVBoxLayout()
         self.setLayout(self.layout)
@@ -63,11 +63,15 @@ class FaceUpload(QDialog):
         enter_layout.addWidget(self.text_label,1)
         
         self.line_edit = QLineEdit(self)
-        enter_layout.addWidget(self.line_edit,7)
+        enter_layout.addWidget(self.line_edit,5)
 
         self.ok_button = QPushButton("确定", self)
         self.ok_button.clicked.connect(self.on_ok_button_clicked)
         enter_layout.addWidget(self.ok_button,2)
+
+        self.cancel_button = QPushButton("取消", self)
+        self.cancel_button.clicked.connect(self.on_ok_button_clicked)
+        enter_layout.addWidget(self.cancel_button,2)
 
         self.load_image()  # 图片自适应 QLabel 大小
     
@@ -92,7 +96,7 @@ class FaceUpload(QDialog):
         if not pixmap.isNull():
             pixmap = pixmap.scaled(self.image_label.width(), self.image_label.height(), Qt.AspectRatioMode.KeepAspectRatio)
             self.image_label.setPixmap(pixmap)
-            # self.image_label.setScaledContents(True)  # 图片自适应 QLabel 大小
+            self.image_label.setScaledContents(True)  # 图片自适应 QLabel 大小
             if not self.is_face:
                 self.tip_label.setText("未检测到人脸")
             elif self.face_count > 1:
@@ -107,16 +111,21 @@ class FaceUpload(QDialog):
             self.tip_label.setText("名字不能为空")
             return
         if not self.is_face or self.face_count > 1:
-            msg.setWindowTitle('提示')
-            msg.setText('保存失败,未检测到人脸或人脸数大于1')
-            msg.setIcon(QMessageBox.Icon.Information)
-            msg.setStandardButtons(QMessageBox.StandardButton.Ok) 
-            msg.exec() 
+            pass
+            # self.tip_label.setText("保存失败,未检测到人脸或人脸数大于1")
+            # msg.setWindowTitle('提示')
+            # msg.setText('保存失败,未检测到人脸或人脸数大于1')
+            # msg.setIcon(QMessageBox.Icon.Information)
+            # msg.setStandardButtons(QMessageBox.StandardButton.Ok) 
+            # msg.exec() 
         else:
             self.file_name = input_text
             self.face_data_save()
-        self.close()
+        return
 
+    def on_ok_button_clicked(self):
+        self.close()
+    
     def face_data_save(self):
         person_names = self.file_name
         #获取图像中所有人脸的编码
